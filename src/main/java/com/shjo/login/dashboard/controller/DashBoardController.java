@@ -3,6 +3,8 @@ package com.shjo.login.dashboard.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.shjo.login.annotation.CheckLogin;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -22,6 +24,7 @@ public class DashBoardController {
 	 * @return
 	 * @throws Exception
 	 */
+	@CheckLogin
 	@RequestMapping(value="/dashboard")
 	public String getDashBoardPage() throws Exception {
 		log.debug("#### getDashBoardPage()");
