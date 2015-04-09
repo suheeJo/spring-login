@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -23,6 +24,13 @@ import com.shjo.login.interceptors.Interceptor;
 	basePackages="com.shjo.login"
 )
 public class MvcConfig extends WebMvcConfigurerAdapter { // 인터셉터를 추가하기 위해 WebMvcConfigurerAdapter 를 상속
+	
+	// @RequestMapping에 매핑된 URL이 아니면 defulat servlet을 타게 함
+	@Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
+    
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
