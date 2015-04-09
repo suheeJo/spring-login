@@ -18,12 +18,12 @@ import com.shjo.login.interceptors.Interceptor;
  * @author 조수희
  *
  */
-@Configuration
-@EnableWebMvc
+@Configuration // 설정용 클래스라는 것을 스프링에게 알려주는 역할
+@EnableWebMvc // WebMvcConfigurationSupport에 정의된 Spring MVC 설정들을 임포트한다.
 @ComponentScan(
 	basePackages="com.shjo.login"
-)
-public class MvcConfig extends WebMvcConfigurerAdapter { // 인터셉터를 추가하기 위해 WebMvcConfigurerAdapter 를 상속
+) // 자동으로 빈 등록
+public class ServletConfig extends WebMvcConfigurerAdapter { // 인터셉터를 추가하기 위해 WebMvcConfigurerAdapter 를 상속
 	
 	// @RequestMapping에 매핑된 URL이 아니면 defulat servlet을 타게 함
 	@Override
@@ -31,7 +31,9 @@ public class MvcConfig extends WebMvcConfigurerAdapter { // 인터셉터를 추�
         configurer.enable();
     }
     
+	// 사용자에게 결과를 랜더링하여 보여주기 위해 사용
 	@Bean
+//	@Profile({"production"})
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");

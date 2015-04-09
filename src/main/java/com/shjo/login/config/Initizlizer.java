@@ -44,13 +44,13 @@ public class Initizlizer implements WebApplicationInitializer{
 	 */
 	private void addDispatcherServlet(ServletContext serveContext) {
 		AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-		applicationContext.getEnvironment().addActiveProfile("production");
-		applicationContext.register(MvcConfig.class);
+		applicationContext.getEnvironment().addActiveProfile("production"); // @profile("production") 인 값만 읽는다, 만약 없으면 default를 읽는다.
+		applicationContext.register(ServletConfig.class);
 		
 		ServletRegistration.Dynamic dispatcher = serveContext.addServlet("dispatcher", new DispatcherServlet(applicationContext));
-		 dispatcher.setLoadOnStartup(1);
-	        dispatcher.addMapping("/");
-	        dispatcher.setInitParameter("dispatchOptionsRequest", "true"); // CORS 를 위해서 option request 도 받아들인다.
+		dispatcher.setLoadOnStartup(1); // 서버 시작 시 무조건 1번 실행
+	    dispatcher.addMapping("/");
+	    dispatcher.setInitParameter("dispatchOptionsRequest", "true"); // CORS 를 위해서 option request 도 받아들인다.
 	}
 	
 	/**
