@@ -12,17 +12,27 @@
 <script src="/resources/js/jquery-1.11.2.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	
+$(document).ready(function() {
+	login.init();
+});
+
+var login = {
+	init: function() {
+		this.$login = $("#login");
+	},
+	bindEvent: function() {
+	}
+};
 </script>
 </head>
 <body>
 <div class="container">
 <form class="form-signin">
 	<h2 class="form-signin-heading">Please sign in</h2>
-	<label for="inputEmail" class="sr-only">Id</label><input class="form-control" id="id" type="text" placeholder="Id" required autofocus>
-	<label for="inputPassword" class="sr-only">Password</label><input class="form-control" id="password" type="password" placeholder="Password" required>
-	<button class="btn btn-primary btn-block" type="submit">로그인</button>
-	<button class="btn btn-default btn-block" type="submit">회원가입</button>
+	<label for="userId" class="sr-only">Id</label><input class="form-control" id="userId" type="text" placeholder="Id" autofocus>
+	<label for="userPassword" class="sr-only">Password</label><input class="form-control" id="userPassword" type="password" placeholder="Password">
+	<button class="btn btn-primary btn-block" id="login">로그인</button>
+	<a class="btn btn-default btn-block" href="/join">회원가입</a>
 </form>
 </div>
 	
