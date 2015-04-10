@@ -1,2 +1,5 @@
 # spring-login
-spring login project
+login project
+
+spring
+javaconfig
