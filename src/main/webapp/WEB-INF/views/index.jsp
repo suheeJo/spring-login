@@ -22,7 +22,7 @@
 	<label for="inputEmail" class="sr-only">Id</label><input class="form-control" id="id" type="text" placeholder="Id" required autofocus>
 	<label for="inputPassword" class="sr-only">Password</label><input class="form-control" id="password" type="password" placeholder="Password" required>
 	<button class="btn btn-primary btn-block" type="submit">로그인</button>
-	<button class="btn btn-default btn-block" type="submit">회원가입</button>
+	<button class="btn btn-default btn-block" type="reset">회원가입</button>
 </form>
 </div>
 	
