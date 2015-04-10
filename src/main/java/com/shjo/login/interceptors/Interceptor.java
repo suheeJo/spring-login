@@ -25,9 +25,7 @@ public class Interceptor extends HandlerInterceptorAdapter{
         //NoCheckLogin 어노테이션이 없음으로 무조건 로그인 체크
         if(usingAuth != null) {
     		if(WebUtils.getSessionAttribute(request, "user") == null){
-	    		response.sendRedirect(request.getContextPath());
-	    		log.debug("#### request.getContextPath(): {}", request.getContextPath());
-	    		
+	    		response.sendRedirect(request.getContextPath() + "/login");
 	    		return false;
     		}
         }

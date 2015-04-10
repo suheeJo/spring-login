@@ -1,4 +1,4 @@
-package com.shjo.login.dashboard.controller;
+package com.shjo.login.web.dashboard.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
