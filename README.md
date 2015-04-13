@@ -1,5 +1,6 @@
 # spring-login
 login project
 
-spring
+jdk 7
+spring 4.1.0
 javaconfig
