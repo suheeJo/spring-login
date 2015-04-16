@@ -7,3 +7,4 @@ javaconfig
 mysql
 mybatis
 validation
+jackson json 2.5.2
