@@ -19,6 +19,10 @@ var join = {
 	init: function() {
 		this.$okBtn = $("#okBtn");
 		this.$joinForm = $("#joinForm");
+		this.$id = $("#id");
+		this.$password = $("#password");
+		this.$name = $("#name");
+		this.$gender = $("input[name='gender']");
 		
 		this.bindEvent();
 	},
@@ -26,10 +30,18 @@ var join = {
 		this.$okBtn.on("click", this.insertMember);
 	},
 	insertMember: function() {
+		var param = {};
+		param.id = join.$id.val();
+		param.password = join.$password.val();
+		param.name = join.$name.val();
+		param.gender = join.$gender.val();
+// 		param.birthday = "";
+		
 		$.ajax({
 			url: "/insertMember",
 			type: "POST",
-			data: join.$joinForm.serialize(),
+			contentType: "application/json",
+			data: /* join.$joinForm.serialize() */JSON.stringify(param),
 			dataType: "json",
 			success: function(data) {
 				console.log(data);

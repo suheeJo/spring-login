@@ -7,7 +7,7 @@ import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,7 +38,8 @@ public class JoinController {
 	
 	@RequestMapping(value="/insertMember", method=RequestMethod.POST)
 	public Map<String, Object> insertMember(
-		@ModelAttribute @Valid JoinParamModel joinParamModel) throws Exception {
+//		@ModelAttribute @Valid JoinParamModel joinParamModel) throws Exception {
+		@RequestBody @Valid JoinParamModel joinParamModel) throws Exception {
 		log.debug("#### insertMember()");
 		log.debug("#### joinParamModel: {}", joinParamModel);
 		
