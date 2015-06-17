@@ -8,3 +8,4 @@ mysql
 mybatis
 validation
 modelmapper
+jackson json 2.5.2
