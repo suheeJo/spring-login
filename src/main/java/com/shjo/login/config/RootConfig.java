@@ -4,11 +4,17 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.modelmapper.ModelMapper;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 /**
  * 루트 설정용 클래스
@@ -17,6 +23,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
  *
  */
 @Configuration
+@PropertySource({"classpath:db.properties"})
 public class RootConfig {
 	
 	@Value("${mysql.driverClassName}")
@@ -25,10 +32,10 @@ public class RootConfig {
 	@Value("${mysql.url}")
 	private String url;
 	
-	@Value("${mysql.userName}")
+	@Value("${mysql.username}")
 	private String userName;
 	
-	@Value("${mysql.userPassword}")
+	@Value("${mysql.password}")
 	private String userPassword;
 	
 	@Bean
@@ -38,17 +45,14 @@ public class RootConfig {
 		dataSource.setUrl(url);
 		dataSource.setUsername(userName);
 		dataSource.setPassword(userPassword);
-		
 		return dataSource;
 	}
 	
 	// transactionManager 설정
-	/*
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
 	}
-	*/
 
 	@Bean
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
@@ -57,4 +61,21 @@ public class RootConfig {
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:**/dao/*.xml"));
         return sqlSessionFactoryBean.getObject();
 	}
+	
+	@Bean(destroyMethod="clearCache")
+    public SqlSessionTemplate sqlSessionTemplate() throws Exception {
+        return new SqlSessionTemplate(sqlSessionFactory());
+    }
+	
+	@Bean
+	public ModelMapper modelMapper() {
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper;
+	}
+	
+	@Bean /* Static 매서드로 빈 생성할 것 */ // @Value 할 수 있도록 해줌
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
+        return propertySourcesPlaceholderConfigurer;
+    }
 }

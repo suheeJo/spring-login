@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shjo.login.web.join.dao.JoinDao;
-import com.shjo.login.web.join.model.JoinParamModel;
+import com.shjo.login.web.join.model.JoinModel;
 
 @Service
 public class JoinService {
+	
 	@Autowired
 	private JoinDao joinDao;
 	
@@ -26,9 +27,9 @@ public class JoinService {
 	 * @param joinModel
 	 * @throws Exception
 	 */
-	public void insertMember(JoinParamModel joinModel) throws Exception {
-		long currentTime = System.currentTimeMillis();
-		Date currentDate = new Date(currentTime);
+	public void insertMember(JoinModel joinModel) throws Exception {
+		Date currentDate = new Date();
+		
 		joinModel.setRegisterDate(currentDate);
 		joinModel.setUpdateDate(currentDate);
 		joinDao.insertMember(joinModel);

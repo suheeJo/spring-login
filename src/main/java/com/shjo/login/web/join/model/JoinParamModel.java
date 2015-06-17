@@ -2,6 +2,8 @@ package com.shjo.login.web.join.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,9 +26,14 @@ public class JoinParamModel {
 	@NotEmpty 
 	private String gender = null;
 	
-//	@NotEmpty @Past 
-	private Date birthday = null;
+	@NotNull
+	private long birthday = 0L;
 	
-	private Date registerDate = null;
-	private Date updateDate = null;
+	// JoinParam에서 사용
+	public Date getBirthDay() {
+		if(birthday > 0) {
+			return new Date(birthday * 1000);
+		}
+		return null;
+	}
 }

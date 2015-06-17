@@ -7,3 +7,4 @@ javaconfig
 mysql
 mybatis
 validation
+modelmapper

@@ -10,6 +10,9 @@
 <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <script src="/resources/js/jquery-1.11.2.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/resources/js/additional-methods.min.js"></script>
+<script type="text/javascript" src="/resources/js/messages_ko.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	join.init();
@@ -23,11 +26,42 @@ var join = {
 		this.$password = $("#password");
 		this.$name = $("#name");
 		this.$gender = $("input[name='gender']");
+		this.$birthday = $("#birthday");
+		this.$joinForm = $("#joinForm");
 		
 		this.bindEvent();
 	},
 	bindEvent: function() {
 		this.$okBtn.on("click", this.insertMember);
+		/* this.$joinForm.validate({
+			submitHandler: function() {
+				if(confirm("회원가이블 완료하시겠습니까?")) {
+					return true;
+				}
+				return false;
+			},
+			rules: {
+				id: {
+					required: true,
+					minlength: 10
+				},
+				password: {
+					required: true,
+					minlength: 20
+				},
+				repassword: {
+					required: true,
+					minlength: 20
+				},
+				name: {
+					required: true,
+					minlength: 5
+				}
+			},
+			messages: {
+				
+			}
+		}); */
 	},
 	insertMember: function() {
 		var param = {};
@@ -35,13 +69,13 @@ var join = {
 		param.password = join.$password.val();
 		param.name = join.$name.val();
 		param.gender = join.$gender.val();
-// 		param.birthday = "";
+		param.birthday = join.$birthday.val();
 		
 		$.ajax({
 			url: "/insertMember",
 			type: "POST",
 			contentType: "application/json",
-			data: /* join.$joinForm.serialize() */JSON.stringify(param),
+			data: JSON.stringify(param),
 			dataType: "json",
 			success: function(data) {
 				console.log(data);
@@ -67,7 +101,7 @@ var join = {
 	<div class="form-group">
 		<label for="userPassword">비밀번호</label>
 		<input class="form-control" id="password" name="password" type="password" placeholder="비밀번호" required>
-		<input class="form-control" id="password2" type="password" placeholder="비밀번호 재확인" required>
+		<input class="form-control" id="repassword" type="text" placeholder="비밀번호 재확인" required>
 	</div>
 	<div class="form-group">
 		<label for="name">이름</label>
@@ -81,6 +115,7 @@ var join = {
 			<label for="birthday">생년월일</label><input class="form-control" id="birthday" type="text" placeholder="생년월일" required>
 	</div>
 	<button class="btn btn-primary" id="okBtn">확인</button>
+	<!-- <input class="btn btn-primary" type="submit" value="확인"> -->
 	<button class="btn btn-default" type="reset">초기화</button>
 	<a class="btn btn-default" type="reset" href="/login" role="button">로그인</a>
 </form>

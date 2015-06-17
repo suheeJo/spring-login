@@ -1,17 +1,19 @@
 package com.shjo.login.web.join.dao;
 
-import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.shjo.login.web.join.model.JoinParamModel;
+import com.shjo.login.web.join.model.JoinModel;
 
 @Repository
 public class JoinDao {
     private static final String NAMESPACE = "com.shjo.login.web.join.dao.JoinMapper.";
 
-    private SqlSession sqlSession;
-    
-    /**
+    @Autowired
+    private SqlSessionTemplate sqlSessionTemplate;
+
+	/**
      * <pre> 
      * 회원 정보를 저장한다.
      * 
@@ -24,8 +26,7 @@ public class JoinDao {
      * @param joinModel
      * @throws Exception
      */
-    public void insertMember(JoinParamModel joinModel) throws Exception {
-    	sqlSession.insert(NAMESPACE + "insertMember", joinModel);
+    public void insertMember(JoinModel joinModel) throws Exception {
+    	sqlSessionTemplate.insert(NAMESPACE + "insertMember", joinModel);
     }
-
 }
