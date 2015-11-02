@@ -3,13 +3,13 @@ package com.shjo.login.interceptors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
 import com.shjo.login.annotation.CheckLogin;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Interceptor extends HandlerInterceptorAdapter{
